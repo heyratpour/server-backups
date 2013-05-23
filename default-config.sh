@@ -86,7 +86,12 @@ SUCCESS_EMAIL_SUBJECT="Backup successfully finished on"
 SUCCESS_EMAIL_TO="notify@mailserver.com"
 SUCCESS_EMAIL_BODY_FILENAME=$TEMPDIR/success_mail
 
+# ---------------------------- #
+#	MISCELLANEOUS		#
+# ---------------------------- #
+
 #Debug option. Set to 1 if you wanna get msgs
 DEBUG_MODE=0
+BACKUP_EXPIRE_DAYS=10
 
 BK_INC_CONFIG=1

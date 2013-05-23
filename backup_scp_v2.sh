@@ -4,6 +4,7 @@
 #    1. Correct output in bk_ssh when password is provided
 #    2. Get Log files as argument
 #    3. Make verbose optional by -v switch
+#    4. Select expired backups by created dates
 
 __DIR__=$(dirname $0)
 source $__DIR__/header.sh
@@ -124,6 +125,11 @@ if [ $SUCCESS -eq 1 ]; then
   
   # Remove temp
   rm -rf $TEMPDIR/*
+  
+  # Remove expired backup
+  expiredBackup=`date -d $BACKUP_EXPIRE_DAYS' day ago' +'%d'`
+  bk_log "Removing $BACKDIR/$expiredBackup.tar"
+  rm $BACKDIR/$expiredBackup.tar
 else
   bk_log "! FAILURE occured while BACKing UP."
   
