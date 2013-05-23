@@ -40,12 +40,20 @@ PASS=Root_Password
 # set to 'ALL' if you want to backup all your databases
 DBS="ALL"
 
+# -------------------- #
+#	LOCATIONS	#
+# -------------------- #
+
 # List all files and directories you wanna tar, separated by a space ARCHIVE_FILES
 # List all files & directories which have probability of change during tar job, separated by a space in ARCHIVE_VAR_FILES
 # Var files whould be completely addressed
 # Relative addresses R related to `TEMPDIR`
 ARCHIVE_FILES="/etc /opt /selinux /var"
 ARCHIVE_VAR_FILES="/var/log"
+
+# ------------- #
+#	SCP	#
+# ------------- #
 
 # Server hostname or IP Address which will be used for SCP and SSH
 SCP_SERVER="MySafeServer.com"
@@ -63,6 +71,10 @@ SCP_LOC="/path/on/secure/server/to/upload/backup"
 # Maximum SCP and MD5 Check retry in case of failure
 MAX_SCP_RETRY=1
 
+# ---------------------------- #
+#	ALERTS AND EMAILS	#
+# ---------------------------- #
+
 # Email configs
 FAILURE_EMAIL_SEND=1
 FAILURE_EMAIL_SUBJECT="Backup failed on"
@@ -76,3 +88,5 @@ SUCCESS_EMAIL_BODY_FILENAME=$TEMPDIR/success_mail
 
 #Debug option. Set to 1 if you wanna get msgs
 DEBUG_MODE=0
+
+BK_INC_CONFIG=1

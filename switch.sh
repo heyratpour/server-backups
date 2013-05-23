@@ -29,3 +29,5 @@ done
 if [ -z "$configFilename" ]; then
   configFilename=$__DIR__/default-config.sh
 fi
+
+BK_INC_SWITCH=1
