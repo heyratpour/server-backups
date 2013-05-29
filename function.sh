@@ -117,9 +117,9 @@ bk_optimizeDatabases(){
     bk_log "Switching to database $db: "
     for table in $TABLES
     do
-      bk_log "* Optimizing table $table ..."
+      bk_debug "* Optimizing table $table ..."
       echo "USE $db; OPTIMIZE TABLE $table" | mysql $loginPhrase  >/dev/null
-      bk_log "done."
+      bk_debug "done."
     done
   done
 }
