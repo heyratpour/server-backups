@@ -64,20 +64,24 @@ case $TAR_OUTPUT in
 	else
           bk_log "Successfully gzipped"
 	fi
-
-        scpRetryCount=0
-        while [ $SUCCESS -eq 0 ] && [ $scpRetryCount -le $MAX_SCP_RETRY ]
-        do
-          if [ $SSH_PASS_IS_SET -eq 1 ]; then
-            bk_scp "$BACKDIR/$DATENAME.tar.gz" "$SCP_USER@$SCP_SERVER:$SCP_LOC/$DATENAME.tar.gz" "$SCP_PASS"
-            bk_md5Check "$BACKDIR/$DATENAME.tar.gz" "$SCP_LOC/$DATENAME.tar.gz" "$SCP_USER" "$SCP_SERVER" "$SCP_PASS"
-          else
-            bk_scp "$BACKDIR/$DATENAME.tar.gz" "$SCP_USER@$SCP_SERVER:$SCP_LOC/$DATENAME.tar.gz"
-            bk_md5Check "$BACKDIR/$DATENAME.tar.gz" "$SCP_LOC/$DATENAME.tar.gz" "$SCP_USER" "$SCP_SERVER"
-          fi
-	  SUCCESS=$?
-          let "scpRetryCount++"
-        done
+	
+	if [ $MAX_SCP_RETRY -ge 0 ]; then
+	  scpRetryCount=0
+	  while [ $SUCCESS -eq 0 ] && [ $scpRetryCount -le $MAX_SCP_RETRY ]
+	  do
+	    if [ $SSH_PASS_IS_SET -eq 1 ]; then
+	      bk_scp "$BACKDIR/$DATENAME.tar.gz" "$SCP_USER@$SCP_SERVER:$SCP_LOC/$DATENAME.tar.gz" "$SCP_PASS"
+	      bk_md5Check "$BACKDIR/$DATENAME.tar.gz" "$SCP_LOC/$DATENAME.tar.gz" "$SCP_USER" "$SCP_SERVER" "$SCP_PASS"
+	    else
+	      bk_scp "$BACKDIR/$DATENAME.tar.gz" "$SCP_USER@$SCP_SERVER:$SCP_LOC/$DATENAME.tar.gz"
+	      bk_md5Check "$BACKDIR/$DATENAME.tar.gz" "$SCP_LOC/$DATENAME.tar.gz" "$SCP_USER" "$SCP_SERVER"
+	    fi
+	    SUCCESS=$?
+	    let "scpRetryCount++"
+	  done
+	else
+	  SUCCESS=1
+	fi
 	;;
 
       "1")
