@@ -69,6 +69,7 @@ SCP_USER="server_username"
 SCP_LOC="/path/on/secure/server/to/upload/backup"
 
 # Maximum SCP and MD5 Check retry in case of failure
+# Set to -1 for no scp
 MAX_SCP_RETRY=1
 
 # ---------------------------- #
@@ -90,8 +91,10 @@ SUCCESS_EMAIL_BODY_FILENAME=$TEMPDIR/success_mail
 #	MISCELLANEOUS		#
 # ---------------------------- #
 
-#Debug option. Set to 1 if you wanna get msgs
+# Debug option. Set to 1 if you wanna get msgs
 DEBUG_MODE=0
+
+# Local backup files expiration days (Remove 'em on expiration day)
 BACKUP_EXPIRE_DAYS=10
 
 BK_INC_CONFIG=1
