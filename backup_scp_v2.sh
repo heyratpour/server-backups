@@ -135,7 +135,9 @@ if [ $SUCCESS -eq 1 ]; then
   bk_log "Removing $BACKDIR/$expiredBackup.*"
   rm $BACKDIR/$expiredBackup.*
   
-  bk_remoteRemove "$SCP_LOC/$expiredBackup.tar.gz" "$SCP_USER" "$SCP_SERVER"
+  if [ $MAX_SCP_RETRY -ge 0 ]; then
+    bk_remoteRemove "$SCP_LOC/$expiredBackup.tar.gz" "$SCP_USER" "$SCP_SERVER"
+  fi
 else
   bk_log "! FAILURE occured while BACKing UP."
   
