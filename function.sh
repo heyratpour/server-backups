@@ -269,6 +269,30 @@ bk_md5Check(){
   fi
 }
 
+bk_remoteRemove(){
+  # Arguments:
+  #   1: Remote filename
+  #   2: Remote Username
+  #   3: Remote Server
+  #   4: Password
+  
+  remoteFilename=$1
+  remoteUsername=$2
+  remoteServer=$3
+  pass=$4
+  
+  bk_log "Gonna remove: $remoteUsername@$remoteServer:$remoteFilename"
+  
+  set local removeCommandResult
+  if [ -z "$pass" ]; then
+    removeCommandResult=$(bk_ssh $remoteUsername $remoteServer "rm $remoteFilename")
+  else
+    removeCommandResult=$(bk_ssh $remoteUsername $remoteServer "rm $remoteFilename" "$pass")
+  fi
+  
+  return 1;
+}
+
 bk_email(){
   # Arguments:
   #   1: Subject

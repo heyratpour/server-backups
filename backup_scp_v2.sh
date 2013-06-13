@@ -132,8 +132,10 @@ if [ $SUCCESS -eq 1 ]; then
   
   # Remove expired backup
   expiredBackup=`date -d $BACKUP_EXPIRE_DAYS' day ago' +'%d'`
-  bk_log "Removing $BACKDIR/$expiredBackup.tar"
-  rm $BACKDIR/$expiredBackup.tar
+  bk_log "Removing $BACKDIR/$expiredBackup.*"
+  rm $BACKDIR/$expiredBackup.*
+  
+  bk_remoteRemove "$SCP_LOC/$expiredBackup.tar.gz" "$SCP_USER" "$SCP_SERVER"
 else
   bk_log "! FAILURE occured while BACKing UP."
   
